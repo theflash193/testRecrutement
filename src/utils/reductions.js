@@ -24,9 +24,9 @@ const getBestOffer = (prize, offers) => {
             case "minus":
                 return applyMinusReduction(prize, offer);
             case "percentage":
-                return `percentage`(prize, offer);
+                return applyPercentageReduction(prize, offer);
             case "slice":
-                return slice(prize, offer);
+                return applySliceReduction(prize, offer);
         }
      });
      allReductions.sort((a, b) => a > b);

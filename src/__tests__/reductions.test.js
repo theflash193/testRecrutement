@@ -1,4 +1,5 @@
 const  reductions = require("../utils/reductions");
+
 describe("", () => {
     test('should return percentage reduction equal to 61.75', () => {
         const offer = { "type": "percentage", "value": 5 };

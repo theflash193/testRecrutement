@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class ButtonShopingCart extends Component {
+class ButtonShoppingCart extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -10,4 +10,4 @@ class ButtonShopingCart extends Component {
     }
 }
  
-export default ButtonShopingCart;
+export default ButtonShoppingCart;
