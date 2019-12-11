@@ -6,11 +6,12 @@ import { Spinner, Button, Row, Col, Carousel, Container } from 'react-bootstrap'
 
 const INITIAL_STATE = {
     articles: [],
-    filterArticle: [],
+    filterArticles: [],
+    selectedArticles: [],
     filter: "",
-    isLoaded: false,
+    isLoaded: true,
+    isSucceed: false,
     error: {},
-    success: false,
 }
 
 class Articles extends Component {
@@ -20,34 +21,59 @@ class Articles extends Component {
     }
 
     componentDidMount() {
-        this.setState({ ...this.state, isLoaded: !this.isLoaded });
         fetch("http://henri-potier.xebia.fr/books")
             .then(data => data.json())
-            .then(data => this.setState({ ...this.state, articles: data, success: true }, console.log(data)))
-            .catch(err => this.setState({ ...INITIAL_STATE, error: err }))
+            .then(data => {
+                // Adding id property for each article
+                const articles = data.map((article, index) => { article.assign(article, {...article, id: index}) });
+
+                this.setState({ ...this.state, articles: articles, filterArticles: articles, isSuccess: true })
+            })
+            .catch(err => this.setState({ ...INITIAL_STATE, error: err , isSucceed: false}))
     }
 
-    Handlerfilter = (e) => {
+    handlerFilter = (e) => {
+        let filter;
+        
         e.preventDefault();
-        this.setState({ ...this.state, filter: e.target.value })
+        if (e.target.value === "") { 
+            this.setState({ ...this.state, filter: "", filterArticles: this.state.articles})
+        } else {
+            filter = this.state.article.filter(article => article.title.includes(e.target.value));
+            this.setState({ ...this.state, filter: e.target.value, filterArticles: filter});
+        }
+    }
+
+    HandlerAddArticle = (id) => {
+        let index;
+
+        if (this.state.articles.find(article => article.id === id) === undefined) {
+            this.state.selectedArticles.push(this.state.articles[id])
+        } else { 
+            index = this.state.selectedArticles.find(article => article.id === id);
+         }
     }
 
     render() {
-        const Cards = (this.state.success) ? this.state.articles.map(article => { console.log(article); return <Card article={article}></Card> }) : <Spinner></Spinner>;
+        const Cards = (this.state.isSuccess) ? 
+            this.state.filterArticles.map(article => { return <Card key={index.toString()} article={article} handlerOnClick={this.HandlerAddArticle(index)}></Card> })
+            : <Spinner></Spinner>;
 
         return (<div>
-            <Row>
-                <Col lg={12}>
-                    <Carousel></Carousel>
-                    <Row></Row>
-                </Col>
-            </Row>
-            <Container>
+                {/* <Row >
+                </Row> */}
                 <Row>
-                        {Cards}
+                    <Col lg={12}>
+                        <Carousel></Carousel>
+                        <Row></Row>
+                    </Col>
                 </Row>
-            </Container>
-                </div>);
+                <Container>
+                    <Row>
+                            {Cards}
+                    </Row>
+                </Container>
+            </div>);
     }
 }
 

@@ -5,12 +5,17 @@ import Articles from './screens/Articles.js';
 import ShoppingCart from './screens/ShoppingCart.js';
 import {BrowserRouter as Router,Route, Switch, Link} from 'react-router-dom';
 import { Container, Nav, Spinner, Button, Carousel, Row, Col} from 'react-bootstrap';
+import {ArticlesContext} from 'Context.js';
+import Navbar from './components/Navbar'
+
 function App() {
+
   return (
       <Router>
+        <Navbar></Navbar>
           <Container>
             <Switch>
-              <Route path='/' exact component={Articles}/>
+              <Route path='/' exact component={ Articles}/>
               <Route path='shoppingcart' component={ShoppingCart}/>
             </Switch>
         </Container>
