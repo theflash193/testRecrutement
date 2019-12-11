@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SearchBar from '../components/SearchBar.js'
 import Card from '../components/Card.js';
 import ButtonShoppingCart from '../components/ButtonShoppingCart.js';
+import Button from 'react-bootstrap/Button';
 
 const INITIAL_STATE = {
     articles: [],
@@ -36,6 +37,7 @@ class Articles extends Component {
 
         return ( <div>
             {Cards}
+            <Button></Button>
             <ButtonShoppingCart></ButtonShoppingCart>
             <Card></Card>
         </div> );
