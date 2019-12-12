@@ -46,20 +46,23 @@ class Articles extends Component {
         let index;
         let updateArray;
 
-        if (this.state.articles.indexOf(article => article.id === id) === -1) {
-            updateArray = this.state.selectedArticles.push(this.state.articles[id])
-            this.setState({...this.state, filterArticles: updateArray})
+        // console.log(id)
+        // console.log(this.state.selectedArticles.indexOf(article => article.id === id))
+        this.state.selectedArticles.forEach(a => console.log(a))
+        // console.log(this.state.selectedArticles.inde(article => article.id === id))
+        if (index = this.state.selectedArticles.findIndex(article => article.id === id) === -1) {
+            // console.log(this.state.selectedArticles.indexOf(article => article.id === id))
+            this.setState({...this.state, selectedArticles: this.state.selectedArticles.concat(this.state.articles[id])})
         } else { 
-            index = this.state.selectedArticles.indexOf(article => article.id === id);
-            updateArray = this.state.selectedArticles.filter(article => article.id === index);
-            this.setState({...this.state, selectedArticles: updateArray})
+            this.setState({...this.state, selectedArticles: this.state.selectedArticles.filter(article => article.id !== id)})
         }
     }
 
     render() {
-        const Cards = (this.state.isSucceed) ? 
-            this.state.filterArticles.map((article, index) => { 
-                return <Card key={index.toString()} article={article} ></Card> 
+        // console.log(this.state);
+        const Cards = (this.state.isSucceed && this.state.filterArticles !== undefined) ? 
+            this.state.filterArticles.map((article, index) => {
+            return <Card key={index.toString()} article={article} onClick={() => {this.HandlerAddArticle(index)}}></Card> 
             })
             :
             <Spinner></Spinner>;

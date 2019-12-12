@@ -9,12 +9,13 @@ class Card extends Component {
 
     test = () => {
         this.setState({isClicked: !this.state.isClicked} );
+        this.props.onClick();
     }
 
     render() {
         const text = (this.state.isClicked) ? "Retirer du panier" : "Ajouter au panier";
 
-        console.log(this.props);
+
         return (
             <Col className="justify-content-md-center" lg={4} md={12} xs={12}>
                 <BootstrapCard style={{ width: '10rem' }}>
