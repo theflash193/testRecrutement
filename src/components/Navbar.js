@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Nav, Spinner, Button, Carousel, Row, Col} from 'react-bootstrap';
+import { Container, Nav, Button} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 
 class Navbar extends Component {
@@ -8,8 +8,8 @@ class Navbar extends Component {
     return (
             <Nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
               <Container>
-                <Link to="/">
-                  <a className="navbar-brand" href="#">Xebia Shop</a>
+                <Link className="navbar-brand" to="/">
+                  Xebia Shop
                 </Link>
                 <Button className="navbar-toggler" type="Button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon" />
@@ -17,14 +17,16 @@ class Navbar extends Component {
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                   <ul className="navbar-nav ml-auto">
                     <li className="nav-item active">
-                      <Link to="/">
-                          <a className="nav-link" href="#">Home
+                      <Link className="nav-link" to="/">
+                          <p>Home
                             <span className="sr-only">(current)</span>
-                          </a>
+                          </p>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="fa fa-shopping-cart"></a>
+                      <Link to="/shoppingCart">
+                        <p>Shoppingcart</p>
+                      </Link>
                     </li>
                   </ul>
                 </div>

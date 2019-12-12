@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import ButtonArticle from './ButtonArcticle';
 import {Card as BootstrapCard, Button, Col, Row} from 'react-bootstrap'
+
 class Card extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { isClicked: false }
+    }
+
+    test = () => {
+        this.setState({isClicked: !this.state.isClicked} );
     }
 
     render() {
-        const synopsis = this.props.article.synopsis.map(text => text);
+        const text = (this.state.isClicked) ? "Retirer du panier" : "Ajouter au panier";
 
         console.log(this.props);
         return (
@@ -16,12 +20,12 @@ class Card extends Component {
                 <BootstrapCard style={{ width: '10rem' }}>
                     <BootstrapCard.Img variant="top" src={this.props.article.cover} />
                     <BootstrapCard.Body>
-                        <h5>{this.props.article.title}</h5>
+                        <p>{this.props.article.title}</p>
                         <h4 className="text-center">{this.props.article.price} &euro;</h4>
                     </BootstrapCard.Body>
                     <BootstrapCard.Footer>
                         <Row className="justify-content-md-center">
-                            <Button variant="primary">Ajouter au panier</Button>
+                            <Button onClick={this.test}>{text}</Button>
                         </Row>
                     </BootstrapCard.Footer>
                 </BootstrapCard>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import SearchBar from '../components/SearchBar.js'
 import Card from '../components/Card.js';
-import ButtonShoppingCart from '../components/ButtonShoppingCart.js';
-import { Spinner, Button, Row, Col, Carousel, Container } from 'react-bootstrap';
+import { Spinner, Row, Col, Container } from 'react-bootstrap';
 
 const INITIAL_STATE = {
     articles: [],
@@ -25,9 +23,9 @@ class Articles extends Component {
             .then(data => data.json())
             .then(data => {
                 // Adding id property for each article
-                const articles = data.map((article, index) => { article.assign(article, {...article, id: index}) });
+                const articles = data.map((article, index) => { const a = {...article, id: index} ; return a});
 
-                this.setState({ ...this.state, articles: articles, filterArticles: articles, isSuccess: true })
+                this.setState({ ...this.state, articles: articles, filterArticles: articles, isSucceed: true })
             })
             .catch(err => this.setState({ ...INITIAL_STATE, error: err , isSucceed: false}))
     }
@@ -39,38 +37,49 @@ class Articles extends Component {
         if (e.target.value === "") { 
             this.setState({ ...this.state, filter: "", filterArticles: this.state.articles})
         } else {
-            filter = this.state.article.filter(article => article.title.includes(e.target.value));
+            filter = this.state.articles.filter(article => article.title.includes(e.target.value));
             this.setState({ ...this.state, filter: e.target.value, filterArticles: filter});
         }
     }
 
     HandlerAddArticle = (id) => {
         let index;
+        let updateArray;
 
-        if (this.state.articles.find(article => article.id === id) === undefined) {
-            this.state.selectedArticles.push(this.state.articles[id])
+        if (this.state.articles.indexOf(article => article.id === id) === -1) {
+            updateArray = this.state.selectedArticles.push(this.state.articles[id])
+            this.setState({...this.state, filterArticles: updateArray})
         } else { 
-            index = this.state.selectedArticles.find(article => article.id === id);
-         }
+            index = this.state.selectedArticles.indexOf(article => article.id === id);
+            updateArray = this.state.selectedArticles.filter(article => article.id === index);
+            this.setState({...this.state, selectedArticles: updateArray})
+        }
     }
 
     render() {
-        const Cards = (this.state.isSuccess) ? 
-            this.state.filterArticles.map(article => { return <Card key={index.toString()} article={article} handlerOnClick={this.HandlerAddArticle(index)}></Card> })
-            : <Spinner></Spinner>;
+        const Cards = (this.state.isSucceed) ? 
+            this.state.filterArticles.map((article, index) => { 
+                return <Card key={index.toString()} article={article} ></Card> 
+            })
+            :
+            <Spinner></Spinner>;
 
+        console.log(this.state);
+        // console.log(this.HandlerAddArticle(2));
         return (<div>
-                {/* <Row >
-                </Row> */}
-                <Row>
-                    <Col lg={12}>
-                        <Carousel></Carousel>
-                        <Row></Row>
-                    </Col>
-                </Row>
                 <Container>
                     <Row>
-                            {Cards}
+                        <Col lg={3} xs={12}>
+                            <p>Recherche :</p>
+                            <input style={{height: 40, width: "100%"}} type="search" placeholder="sorcier" onChange={(e) => {this.handlerFilter(e)}}></input>
+                        </Col>
+                        <Col lg={9} xs={12}>
+                            <Container>
+                                <Row>
+                                        {Cards}
+                                </Row>
+                            </Container>
+                        </Col >
                     </Row>
                 </Container>
             </div>);

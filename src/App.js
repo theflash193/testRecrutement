@@ -3,9 +3,9 @@ import './App.css';
 import './assets/css/shop-homepage.css';
 import Articles from './screens/Articles.js';
 import ShoppingCart from './screens/ShoppingCart.js';
-import {BrowserRouter as Router,Route, Switch, Link} from 'react-router-dom';
-import { Container, Nav, Spinner, Button, Carousel, Row, Col} from 'react-bootstrap';
-import {ArticlesContext} from 'Context.js';
+import {BrowserRouter as Router,Route, Switch} from 'react-router-dom';
+import { Container} from 'react-bootstrap';
+// import {ArticlesContext} from 'Context.js';
 import Navbar from './components/Navbar'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Navbar></Navbar>
           <Container>
             <Switch>
-              <Route path='/' exact component={ Articles}/>
+              <Route path='/' exact component={Articles}/>
               <Route path='shoppingcart' component={ShoppingCart}/>
             </Switch>
         </Container>

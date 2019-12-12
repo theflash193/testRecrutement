@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Row, Col, Container , Button} from 'react-bootstrap';
-import Card from '../components/Card';
+import { Row, Container } from 'react-bootstrap';
+// import Card from '../components/Card';
 
 class ShoppingCart extends Component {
     constructor(props) {
