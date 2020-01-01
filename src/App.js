@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import './assets/css/shop-homepage.css';
 import Articles from './screens/Articles.js';
 import ShoppingCart from './screens/ShoppingCart.js';
 import {BrowserRouter as Router,Route, Switch} from 'react-router-dom';
 import { Container} from 'react-bootstrap';
-// import {ArticlesContext} from 'Context.js';
+import {ArticlesProvider} from './ArticlesContext.js';
 import Navbar from './components/Navbar'
 
 function App() {
-
   return (
+    <ArticlesProvider>
       <Router>
         <Navbar></Navbar>
           <Container>
             <Switch>
-              <Route path='/' exact component={Articles}/>
-              <Route path='shoppingcart' component={ShoppingCart}/>
+              <Route exact path='/' >
+                <Articles></Articles>
+              </Route>
+              <Route exact path='/shoppingcart'>
+                <ShoppingCart></ShoppingCart>
+              </Route>
             </Switch>
         </Container>
         <footer className="py-5 bg-dark">
@@ -26,6 +30,7 @@ function App() {
         </footer >
 
       </Router>
+    </ArticlesProvider>
 
   );
 }

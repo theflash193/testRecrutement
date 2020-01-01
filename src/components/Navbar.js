@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Nav, Button} from 'react-bootstrap';
+import { Container, Nav, Button, Navbar as BootstrapNavbar} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 
 class Navbar extends Component {
@@ -16,15 +16,15 @@ class Navbar extends Component {
                 </Button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                   <ul className="navbar-nav ml-auto">
-                    <li className="nav-item active">
-                      <Link className="nav-link" to="/">
+                    <li className="nav-item">
+                      <Link to="/">
                           <p>Home
-                            <span className="sr-only">(current)</span>
+                            {/* <span className="sr-only">(current)</span> */}
                           </p>
                       </Link>
                     </li>
-                    <li className="nav-item">
-                      <Link to="/shoppingCart">
+                    <li className="nav-item active">
+                      <Link to="/shoppingcart">
                         <p>Shoppingcart</p>
                       </Link>
                     </li>

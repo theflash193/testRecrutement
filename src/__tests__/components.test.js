@@ -1,12 +1,14 @@
 import { shallow } from "enzyme";
-
+import React from 'react'
+import fetch from 'node-fetch'
 // Components
 import ButtonShoppingCart from '../components/ButtonShoppingCart.js'
-import ButtomArticle from '../components/ButtonArcticle.js';
+import ButtonArticle from '../components/ButtonArcticle.js';
 import Card from '../components/Card.js';
 import SearchBar from '../components/SearchBar.js';
-import Articles from '../screen/Articles.js';
-import ShoppingCart from '../screen/ShoppingCart.js';
+import Articles from '../screens/Articles.js';
+import ShoppingCart from '../screens/ShoppingCart.js';
+import Navbar from '../components/Navbar.js';
 
 // setup file
 import { configure } from 'enzyme';
@@ -14,73 +16,113 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-describe("Simple test of Components ", () => {
-    test("Should render ButtonShoppingCart Component", () => { 
-    const wrapper = shallow(<ShoppingCart></ShoppingCart>);
-        console.log(<ShoppingCart/>)
-        // expect(wrapper).toBeTruthy();
-     })
+describe("Component : ", () => { 
 
-    // test("Should Render ButtomArticle Component", () => { 
-    //     const wrapper = shallow(<ButtomArticle></ButtomArticle>);
+    describe("when ButtonArticle is called", () => {
+        test("it should be render", () => { 
+            const wrapperButtonArticle = shallow(<ButtonArticle/>)
+            expect(wrapperButtonArticle).toBeTruthy()
+         })
+    })
         
-    //     expect(wrapper).toBeTruthy();
-    // })
-    // test("Should Render to Card Component", () => { 
-    //     const wrapper = shallow(<Card></Card>);
-        
-    //     expect(wrapper).toBeTruthy();
-    // })
-    // test("Should Render to SearchBar Component", () => { 
-    //     const wrapper = shallow(<SearchBar></SearchBar>);
-        
-    //     expect(wrapper).toBeTruthy();
-        
-    // })
-    // test("Should Render to Articles Component", () => { 
-    //     const wrapper = shallow(<Articles></Articles>);
-        
-    //     expect(wrapper).toBeTruthy();
-        
-    // })
-    // test("Should Render to ShoppingCart Component", () => { 
-    //     const wrapper = shallow(<ShoppingCart></ShoppingCart>);
-        
-    //     expect(wrapper).toBeTruthy();
+    describe("When Card is called", () => { 
+        test("it should be render", () => { 
+            const wrapperCard = shallow(<Card/>)
+            expect(wrapperCard).toBeTruthy()
+            })
+        })
+            
+    describe("When SearchBar is called", () => { 
+        test("it should be render", () => { 
+            const wrappersearchBar = shallow(<SearchBar/>)
+            expect(wrappersearchBar).toBeTruthy()
+        })
+            
+    })
+                
+    describe("When Navbar is called", () => { 
+        test("it should be render", () => { 
+            const wrapperNavbar = shallow(<Navbar/>);
+            expect(wrapperNavbar).toBeTruthy();
+        })
+    })
 
-    //  })
+    // describe("When Footer is called", () => { 
+    //     test("it should be render", () => { 
+    //         const wrapperFooter = shallow(<Footer/>)
+    //         expect(wrapperFooter).toBeThrusty()
+    //     })
+    // })
 })
 
-// describe("testing behaviour of Articles page", () => {
-//     test("Should upload the article from api", () => { 
+describe("Articles page", () => {
+    let wrapperArticle = shallow(<Articles/>);
 
-//      })
-//     test("Should search for x book", () => { 
+    console.log(wrapperArticles);
+    describe("When is loaded ", () => {
+        test("", () => { 
 
-//      })
-//     test("Should add book in shoppingCart", () => { 
+        })
+    })
+    
+    describe("When user search for x filter to", () => { 
+        test("", () => { 
+            
+        })
+        
+    })
+    
+    describe("When user click on 1 article ", () => { 
+        test("", () => { 
+            
+        })
+    })
+    
+    describe("When user click on 1 article ", () => { 
+        test("", () => { 
+            
+        })  
+    })
+})
 
-//      })
-// })
+describe("Shopping cart page", () => { 
+    describe("When is loaded ", () => { 
+        test("should ", () => { 
 
-// describe("testing behaviour of ShoppingCart page", () => {
-//     test("Should lead to ShoppingCart page", () => { 
+         })
+    })
 
-//      })
-//     test("Should have to 2 added in cart", () => { 
+    describe("When is loaded ", () => { 
+        test("", () => { 
 
-//      })
-//     test("Should suggest x offer", () => { 
+         })
+    })
 
-//      })
-//     test("Should have to 4 added in cart", () => { 
+    describe("When is loaded ", () => { 
+        test("", () => { 
 
-//      })
-//     test("Should suggest x offer", () => { 
+         })
+    })
+    describe("When is loaded ", () => { 
+        test("", () => { 
 
-//      })
-//     test("Should suggest x offer", () => { 
+         })
+    })
+    describe("When is loaded ", () => { 
+        test("", () => { 
 
-//      })
-//     test("Should buy offer should send the user on ShoppingCart")
-// })
+         })
+    })
+
+    describe("When is loaded ", () => { 
+        test("", () => { 
+
+         })
+    })
+    // when no article is selectioned should render nothing
+    // when no article is selectioned and we click to return 
+    // when article is selectioned should a offers of render x
+    // when return to should have nothng in is shoping cart
+    // when article is selectioned should render x
+})
+

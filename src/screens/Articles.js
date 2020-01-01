@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import Card from '../components/Card.js';
 import { Spinner, Row, Col, Container } from 'react-bootstrap';
+import {ArticlesContext} from '../ArticlesContext'
 
 const INITIAL_STATE = {
     articles: [],
@@ -13,12 +14,14 @@ const INITIAL_STATE = {
 }
 
 class Articles extends Component {
+    static contextType = ArticlesContext;
+
     constructor(props) {
         super(props);
-        this.state = INITIAL_STATE;
+        this.state = {INITIAL_STATE};
     }
 
-    componentDidMount() {
+    componentDidMount() {        
         fetch("http://henri-potier.xebia.fr/books")
             .then(data => data.json())
             .then(data => {
@@ -46,20 +49,19 @@ class Articles extends Component {
         let index;
         let updateArray;
 
-        // console.log(id)
-        // console.log(this.state.selectedArticles.indexOf(article => article.id === id))
-        this.state.selectedArticles.forEach(a => console.log(a))
-        // console.log(this.state.selectedArticles.inde(article => article.id === id))
-        if (index = this.state.selectedArticles.findIndex(article => article.id === id) === -1) {
+        if (index = this.context.state.articles.findIndex(article => article.id === id) === -1) {
             // console.log(this.state.selectedArticles.indexOf(article => article.id === id))
-            this.setState({...this.state, selectedArticles: this.state.selectedArticles.concat(this.state.articles[id])})
+            // this.setState({...this.state, selectedArticles: this.state.selectedArticles.concat(this.state.articles[id])})
+            this.context.setArticles(this.context.state.articles.concat(this.state.articles[id]));
+            // this.setState({...this.state, selectedArticles: this.state.selectedArticles.concat(this.state.articles[id])})
         } else { 
-            this.setState({...this.state, selectedArticles: this.state.selectedArticles.filter(article => article.id !== id)})
+            // this.setState({...this.state, selectedArticles: this.state.selectedArticles.filter(article => article.id !== id)})
+            this.context.setArticles(this.context.state.articles.filter(article => article.id !== id));
         }
     }
 
     render() {
-        // console.log(this.state);
+        console.log(this.context.state);
         const Cards = (this.state.isSucceed && this.state.filterArticles !== undefined) ? 
             this.state.filterArticles.map((article, index) => {
             return <Card key={index.toString()} article={article} onClick={() => {this.HandlerAddArticle(index)}}></Card> 
@@ -67,7 +69,6 @@ class Articles extends Component {
             :
             <Spinner></Spinner>;
 
-        console.log(this.state);
         // console.log(this.HandlerAddArticle(2));
         return (<div>
                 <Container>

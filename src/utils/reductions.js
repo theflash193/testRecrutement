@@ -1,10 +1,14 @@
 // return the total reduction by applying the minus offer
 const applyMinusReduction = (totalPrize, offer) => { 
+    if (totalPrize === undefined || totalPrize === undefined)
+        return undefined;
     return totalPrize - offer.value;
 }
 
 // return the total reduction by applying the percentage offer
 const applyPercentageReduction = (totalPrize, offer) => {
+    if (totalPrize === undefined || totalPrize === undefined)
+        return undefined;
     return totalPrize - ((totalPrize * offer.value) / 100);
 }
 
@@ -12,12 +16,18 @@ const applyPercentageReduction = (totalPrize, offer) => {
 const applySliceReduction = (totalPrize, offer) => {
     let slice;
 
+    if (totalPrize === undefined || totalPrize === undefined)
+        return undefined;
     slice = (totalPrize / offer.sliceValue) >> 0;
     return  totalPrize - (slice * offer.value);
 }
 
 // return the best offer
 const getBestOffer = (prize, offers) => {
+    let allReductions;
+
+    if (prize === undefined || offers === undefined)
+        return undefined;
     // create a array of all reduction then sort it to find the best offer
     allReductions = offers.map((offer) => {
         switch (offer.type) {

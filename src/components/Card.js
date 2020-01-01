@@ -15,9 +15,8 @@ class Card extends Component {
     render() {
         const text = (this.state.isClicked) ? "Retirer du panier" : "Ajouter au panier";
 
-
         return (
-            <Col className="justify-content-md-center" lg={4} md={12} xs={12}>
+            <Col className="justify-content align-item-bottom" lg={4} md={6} xs={6}>
                 <BootstrapCard style={{ width: '10rem' }}>
                     <BootstrapCard.Img variant="top" src={this.props.article.cover} />
                     <BootstrapCard.Body>
@@ -25,12 +24,11 @@ class Card extends Component {
                         <h4 className="text-center">{this.props.article.price} &euro;</h4>
                     </BootstrapCard.Body>
                     <BootstrapCard.Footer>
-                        <Row className="justify-content-md-center">
+                        <Row className="justify-content-center">
                             <Button onClick={this.test}>{text}</Button>
                         </Row>
                     </BootstrapCard.Footer>
                 </BootstrapCard>
-
             </Col>
         )
      }
